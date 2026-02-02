@@ -31,6 +31,19 @@ const startingSound = new Audio("carStart.wav");
 const carSound = new Audio("carSound.mp3");
 const carbrake = new Audio("carbrake.wav");
 const bgSound = new Audio("bgSound.mp3");
+const hornSound = new Audio("horn.wav")
+
+function unlockAudio() {
+  [startingSound, carSound, carbrake, bgSound, hornSound].forEach(a => {
+    a.play().then(() => {
+      a.pause();
+      a.currentTime = 0;
+    }).catch(() => { });
+  });
+}
+
+document.addEventListener("pointerdown", unlockAudio, { once: true });
+
 
 acceleration.addEventListener("pointerdown", () => {
   target = 20;
@@ -44,10 +57,11 @@ acceleration.addEventListener("pointerdown", () => {
   }
 
   setTimeout(() => {
+    if (!carSound.paused) return;
     carSound.loop = true;
     carSound.volume = 0.5;
-    carSound.play()
-  }, 800);
+    carSound.play().catch(() => { });
+  }, 300);
 
   bgSound.play()
   bgSound.loop = true;
@@ -59,7 +73,7 @@ acceleration.addEventListener("pointerup", () => {
   cloudTargetSpeed = 2;
   carSound.pause()
 })
-acceleration.addEventListener("pointerup", () => {
+acceleration.addEventListener("pointercancel", () => {
   target = 8;
   treeTargetSpeed = 8;
   cloudTargetSpeed = 2;
@@ -81,7 +95,7 @@ brake.addEventListener("pointerup", () => {
 
   carbrake.pause()
 })
-brake.addEventListener("pointerleave", () => {
+brake.addEventListener("pointercancel", () => {
   target = 2;
   dipTarget = 0;
   treeTargetSpeed = 2;
@@ -102,7 +116,6 @@ function trackControl() {
 
   bounceTime += speed * 0.02;
   let bounce = Math.sin(bounceTime) * speed * 0.2
-  console.log(bounce)
   dip += (dipTarget - dip) * dipAcc;
   frame.style.transform = `translateY(${bounce + dip}px) rotate(${dip * 0.2}deg)`
 
@@ -137,7 +150,6 @@ surroundings()
 
 //horn_logic
 const horn = document.querySelector(".horn img");
-const hornSound = new Audio("horn.wav")
 
 horn.addEventListener("click", () => {
   hornSound.currentTime = 0;
@@ -181,7 +193,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   rotate();
-  window.addEventListener("resize", rotate);
+  window.addEventListener("orientationchange", rotate);
 
 });
 
