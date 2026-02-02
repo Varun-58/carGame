@@ -7,7 +7,265 @@
   font-family: "Rubik Storm", system-ui;
 }
 
+body {@import url("https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@400..800&family=Baloo+Paaji+2:wght@400..800&family=Momo+Signature&family=Rubik+Storm&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  outline: 0;
+  font-family: "Rubik Storm", system-ui;
+}
+
 body {
+  height: 100svh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-color: rgb(146, 148, 151);
+}
+
+.gameBox {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  animation: gameScale 0.4s ease-in;
+}
+
+.sky {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 80vh;
+  width: 100vw;
+  background-image: url(clouds.jpg);
+  background-size: auto 100%;
+  background-repeat: repeat-x;
+  background-position-x: 0;
+}
+
+.trees {
+  position: absolute;
+  bottom: 26vh;
+  left: 0;
+  height: 81.4vh;
+  width: 100vw;
+  background-image: url(trees.png);
+  background-size: auto 100%;
+  background-repeat: repeat-x;
+  background-position-x: 0;
+}
+
+.road {
+  position: absolute;
+  bottom: -15vh;
+  left: 0;
+  height: 60vh;
+  width: 100vw;
+  background-image: url(track.png);
+  background-position: bottom center;
+  background-size: auto 100%;
+  background-repeat: repeat-x;
+  background-position-x: 0;
+}
+
+.car {
+  position: relative;
+  bottom: -21.5vh;
+  width: clamp(200px, 20vw, 250px);
+  aspect-ratio: 2048 / 1365;
+  z-index: 45;
+}
+
+.carFrame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  display: block;
+  z-index: 999;
+}
+
+.wheelLeft {
+  position: absolute;
+  bottom: 29%;
+  left: 16%;
+  height: 22%;
+  aspect-ratio: 1;
+  z-index: 999;
+  transform-origin: 51% 52%;
+}
+
+.wheelRight {
+  position: absolute;
+  bottom: 29%;
+  right: 14.5%;
+  height: 21.5%;
+  aspect-ratio: 1;
+  z-index: 999;
+  transform-origin: 51% 52%;
+}
+
+.controlers {
+  height: 50%;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  z-index: 999;
+}
+
+.br {
+  position: absolute;
+  width: clamp(110px, 30vh, 160px);
+  aspect-ratio: 3/4;
+  top: 10%;
+  left: 4%;
+  z-index: 999;
+  touch-action: none;
+  transition: transform 0.09s ease-out;
+}
+
+.acc {
+  position: absolute;
+  width: clamp(110px, 30vh, 160px);
+  aspect-ratio: 3/4;
+  top: 10%;
+  right: 4%;
+  z-index: 999;
+  touch-action: none;
+  transition: transform 0.09s ease-out;
+}
+
+.pressed {
+  transform: scale(0.8) translateY(-25px);
+}
+
+.horn {
+  position: absolute;
+  top: 40%;
+  right: 2%;
+  height: 20%;
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.horn img {
+  position: absolute;
+  z-index: 999;
+  height: 100px;
+  aspect-ratio: 3/2;
+}
+
+.startPage {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+  background-image: url(frontPage.png);
+  background-size: 100% 100%;
+}
+
+/* .txt {
+} */
+
+.txt p {
+  font-size: 2.5rem;
+  color: aliceblue;
+}
+
+.startPage button {
+  height: 3rem;
+  width: 14rem;
+  border-radius: 4rem;
+  font-size: 2.3rem;
+  letter-spacing: 4px;
+  background-color: transparent;
+  border: 0.1rem solid wheat;
+  box-shadow: 0 0 0.2rem wheat;
+  color: aliceblue;
+}
+
+.rotateDevice {
+  height: 40%;
+  width: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  text-align: center;
+  border: 0.2rem solid purple;
+  color: white;
+}
+
+.rotateDevice p {
+  font-size: 3rem;
+}
+
+.hide {
+  display: none;
+}
+
+.hornPunp {
+  animation: pump 0.2s ease-in;
+}
+@keyframes pump {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.startBtnPump {
+  animation: pump01 0.2s ease-in;
+}
+@keyframes pump01 {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes gameScale {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -256,4 +514,5 @@ body {
   100% {
     transform: scale(1);
   }
+
 }
