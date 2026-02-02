@@ -193,10 +193,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   rotate();
-  window.addEventListener("orientationchange", rotate);
+  window.addEventListener("resize", rotate);
 
 });
 
 document.addEventListener("contextmenu", (e) => {
   e.preventDefault();
 });
+
